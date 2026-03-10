@@ -27,7 +27,7 @@ export interface RegisterData {
   email: string;
   password: string;
   aadhaarId: string;
-  role: "admin" | "voter";
+  role: UserRole;
   walletAddress: string;
 }
 
