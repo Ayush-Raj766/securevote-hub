@@ -51,7 +51,7 @@ export default function RegisterPage() {
     try {
       await registerUser({ fullName: data.fullName, email: data.email, password: data.password, aadhaarId: data.aadhaarId, role: data.role, walletAddress: wallet.address });
       toast({ title: "Registration successful!" });
-      navigate(data.role === "admin" ? "/admin" : "/voter");
+      navigate(data.role === "admin" ? "/admin" : data.role === "subadmin" ? "/subadmin" : "/voter");
     } catch (err: any) {
       toast({ title: err.message || "Registration failed", variant: "destructive" });
     } finally {
