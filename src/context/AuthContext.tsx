@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
+export type UserRole = "admin" | "subadmin" | "voter";
+
 export interface User {
   id: string;
   fullName: string;
   email: string;
-  role: "admin" | "voter";
+  role: UserRole;
   walletAddress: string;
   aadhaarId: string;
   isApproved: boolean;
