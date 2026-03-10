@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
+export type UserRole = "admin" | "subadmin" | "voter";
+
 export interface User {
   id: string;
   fullName: string;
   email: string;
-  role: "admin" | "voter";
+  role: UserRole;
   walletAddress: string;
   aadhaarId: string;
   isApproved: boolean;
@@ -25,7 +27,7 @@ export interface RegisterData {
   email: string;
   password: string;
   aadhaarId: string;
-  role: "admin" | "voter";
+  role: UserRole;
   walletAddress: string;
 }
 
@@ -44,6 +46,16 @@ const MOCK_USERS: (User & { password: string })[] = [
     password: "Admin@123",
   },
   {
+    id: "subadmin-1",
+    fullName: "Sub Admin User",
+    email: "subadmin@blockvote.io",
+    role: "subadmin",
+    walletAddress: "0x5678901234abcdef5678901234abcdef56789012",
+    aadhaarId: "4444-5555-6666",
+    isApproved: true,
+    password: "SubAdmin@123",
+  },
+  {
     id: "voter-1",
     fullName: "Voter User",
     email: "voter@blockvote.io",
@@ -54,6 +66,8 @@ const MOCK_USERS: (User & { password: string })[] = [
     password: "Voter@123",
   },
 ];
+
+export { MOCK_USERS };
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);

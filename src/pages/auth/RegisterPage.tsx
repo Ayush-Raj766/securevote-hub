@@ -22,7 +22,7 @@ const registerSchema = z.object({
     .regex(/[0-9]/, "Must contain a number")
     .regex(/[^A-Za-z0-9]/, "Must contain a special character"),
   confirmPassword: z.string(),
-  role: z.enum(["admin", "voter"]),
+  role: z.enum(["admin", "voter", "subadmin"]),
 }).refine((d) => d.password === d.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
@@ -51,7 +51,7 @@ export default function RegisterPage() {
     try {
       await registerUser({ fullName: data.fullName, email: data.email, password: data.password, aadhaarId: data.aadhaarId, role: data.role, walletAddress: wallet.address });
       toast({ title: "Registration successful!" });
-      navigate(data.role === "admin" ? "/admin" : "/voter");
+      navigate(data.role === "admin" ? "/admin" : data.role === "subadmin" ? "/subadmin" : "/voter");
     } catch (err: any) {
       toast({ title: err.message || "Registration failed", variant: "destructive" });
     } finally {
@@ -102,6 +102,7 @@ export default function RegisterPage() {
               <SelectContent>
                 <SelectItem value="voter">Voter</SelectItem>
                 <SelectItem value="admin">Admin</SelectItem>
+                <SelectItem value="subadmin">Sub-Admin</SelectItem>
               </SelectContent>
             </Select>
           </div>
