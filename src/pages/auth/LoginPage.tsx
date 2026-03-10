@@ -48,7 +48,7 @@ export default function LoginPage() {
       const savedUser = localStorage.getItem("bv_user");
       if (savedUser) {
         const user = JSON.parse(savedUser);
-        navigate(user.role === "admin" ? "/admin" : "/voter");
+        navigate(user.role === "admin" ? "/admin" : user.role === "subadmin" ? "/subadmin" : "/voter");
       }
     } catch (err: any) {
       toast({ title: err.message || "Login failed", variant: "destructive" });

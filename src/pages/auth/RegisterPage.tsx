@@ -22,7 +22,7 @@ const registerSchema = z.object({
     .regex(/[0-9]/, "Must contain a number")
     .regex(/[^A-Za-z0-9]/, "Must contain a special character"),
   confirmPassword: z.string(),
-  role: z.enum(["admin", "voter"]),
+  role: z.enum(["admin", "voter", "subadmin"]),
 }).refine((d) => d.password === d.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
