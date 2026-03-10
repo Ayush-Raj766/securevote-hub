@@ -102,6 +102,7 @@ export default function RegisterPage() {
               <SelectContent>
                 <SelectItem value="voter">Voter</SelectItem>
                 <SelectItem value="admin">Admin</SelectItem>
+                <SelectItem value="subadmin">Sub-Admin</SelectItem>
               </SelectContent>
             </Select>
           </div>
